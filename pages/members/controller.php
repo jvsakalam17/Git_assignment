@@ -120,7 +120,7 @@ class members extends Controller{
     {
         $url = $_SERVER['REQUEST_URI'];
 
-        if(!isset($_SESSION["CSRF_TOKEN"]) && $url != "/mvc/members/login"):
+        if(!isset($_SESSION["CSRF_TOKEN"]) && $url != "/Git_assignment/members/login"):
            header("location:login");
            
         else:
