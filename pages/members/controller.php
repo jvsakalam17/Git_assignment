@@ -114,6 +114,25 @@ class members extends Controller{
         $this->view->render("members/add_member_view");
     
     }
+
+    //csrf validation
+    public function csrf()
+    {
+        $url = $_SERVER['REQUEST_URI'];
+
+        if(!isset($_SESSION["CSRF_TOKEN"]) && $url != "/mvc/members/login"):
+           header("location:login");
+           
+        else:
+            if(isset($_POST["csrf"])):
+                if($_SESSION["CSRF_TOKEN"] != $_POST["csrf"]):
+                   header("HTTP/1.0 404 Not Found"); 
+                   exit;                  
+                endif;
+            endif;
+        endif;
+
+    }   
     
 
 }

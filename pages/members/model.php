@@ -4,10 +4,7 @@ class members_Model extends Model{
 
     public function __construct()
     {
-        parent::__construct();
-        date_default_timezone_set('Asia/Manila');
-        session_start();     
-        $this->csrf();
+        parent::__construct();   
         
     }
 
@@ -38,27 +35,7 @@ class members_Model extends Model{
 	{
 		session_destroy();
         
-	}
-    
-    //csrf validation
-    public function csrf()
-    {
-        $url = $_SERVER['REQUEST_URI'];
-
-        if(!isset($_SESSION["CSRF_TOKEN"]) && $url != "/mvc/members/login"):
-           header("location:login");
-           
-        else:
-            if(isset($_POST["csrf"])):
-                if($_SESSION["CSRF_TOKEN"] != $_POST["csrf"]):
-                   header("HTTP/1.0 404 Not Found"); 
-                   exit;                  
-                endif;
-            endif;
-        endif;
-
-    }
-    
+	}   
 
     //view all members statement
     public function getMembers()
